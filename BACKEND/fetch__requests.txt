@@ -1,0 +1,87 @@
+fetch('http://localhost:3000/api/v1/posts').then(res => res.json()).then(console.log)
+
+
+fetch('http://localhost:3000/api/v1/posts', {
+    headers: { 'Content-Type': 'application/json' },
+    method: 'POST',
+    body: JSON.stringify({ title: 'Test Post' })
+})
+  .then(res => res.json())
+  .then(console.log)
+
+
+
+fetch('http://localhost:3000/api/v1/posts/6787a564c4e623e039534d25', {
+headers: { 'Content-Type': 'application/json' },
+method: 'PATCH',
+body: JSON.stringify({ title: 'Test Post Changed' })
+})
+.then(res => res.json())
+.then(console.log)
+
+
+
+fetch('http://localhost:3000/api/v1/posts/6787b13221f00fa40e214941', {
+    method: 'DELETE',
+})
+  .then(res => res.status)
+  .then(console.log)
+
+fetch('http://localhost:3000/api/v1/posts/6787b13221f00fa40e214941')
+  .then(res => res.status)
+  .then(console.log)
+
+
+// Завести нового юзера
+const res = await fetch('http://localhost:3000/api/v1/user/signup', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ username: 'dan', password: 'hunter2'})
+})
+console.log(await res.json())
+
+
+//  login юзера
+const res = await fetch('http://localhost:3000/api/v1/user/login', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ username: 'dan', password: 'hunter2'
+})
+})
+console.log(await res.json())      
+возвращает token
+{ token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2OGE0MzRkZjUzYjY4MmQ3NGFjNDFiZDMiLCJpYXQiOjE3NTU1OTIwNzYsImV4cCI6MTc1NTY3ODQ3Nn0.MNMCkLBxmOO-Vw6YICgzeQyOIcHBb_HUmzQA9H_rUmw" }
+
+
+// доступ к маршрутам без входа в систему.
+// должен возвращать unatourized 401
+const res = await fetch('http://localhost:3000/api/v1/posts', {
+  method: 'POST',
+  headers: {
+      'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({ title: 'Test Post' })
+})
+console.log(await res.json())
+
+
+
+// Попробуйте создать новый пост; вы увидите, что он создан пользователем, идентифицированным в JWT. 
+// Вы можете сделать это, выполнив следующий код в консоли браузера (не забудьте заменить <TOKEN> на ваш ранее сгенерированный JWT):
+const res = await fetch('http://localhost:3000/api/v1/posts', {
+  method: 'POST',
+  headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2OGE0MzRkZjUzYjY4MmQ3NGFjNDFiZDMiLCJpYXQiOjE3NTU1OTIwNzYsImV4cCI6MTc1NTY3ODQ3Nn0.MNMCkLBxmOO-Vw6YICgzeQyOIcHBb_HUmzQA9H_rUmw'
+  },
+  body: JSON.stringify({ title: 'Test Post 2 dan', contents: 'Body Post 2 dan' })
+})
+console.log(await res.json())
+
+// ответ в response
+//__v: 0
+_id: "68a43c3653b682d74ac41bd6"
+author: "68a434df53b682d74ac41bd3"
+createdAt: "2025-08-19T08:56:22.871Z"
+​
+
